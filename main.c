@@ -5,12 +5,13 @@
  *
  *Return: 0 Always
  */
-int main(){
+int main()
+{
 char command[100];
 while (1){
 printf("$ ");
-fgets(command, sizeof(command), stdin);
+fgets(command,sizeof(command), stdin);
 printf("%s", command);
 }
-return 0;
+return (0);
 }
