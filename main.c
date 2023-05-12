@@ -7,12 +7,23 @@
  */
 int main(void)
 {
-char command[100];
-while (1)
-{
-printf("$ ");
-fgets(command, sizeof(command), stdin);
-printf("%s", command);
-}
-return (0);
+	char *command = NULL;
+	size_t bufsize = 0;
+
+	while (1)
+	{	
+		printf("$ ");
+	       	ssize_t chars_read;
+		chars_read = getline(&command, &bufsize, stdin);
+		if (chars_read == -1) {
+			if (feof(stdin)) {
+			       	printf("\n");
+				break;
+			} else {
+				perror("error");
+			}
+		}	
+		printf("%s", command);
+	}
+	return (0);
 }
