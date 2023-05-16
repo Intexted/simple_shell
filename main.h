@@ -7,7 +7,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
-
+#define COMMAND_LENGTH 100
 
 #endif
 
