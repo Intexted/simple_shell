@@ -12,10 +12,7 @@ int main(void)
 	char *command = NULL;
 	size_t bufsize = 0;
 	ssize_t chars_read;
-	char *token;
 	char *args[COMMAND_LENGTH];
-	int i;
-	pid_t pid;
 
 	while (1)
 	{
@@ -36,38 +33,13 @@ int main(void)
 		}
 
 		command[strcspn(command, "\n")] = '\0';
-		token = strtok(command, " ");
-		if (token != NULL)
-		{
-			args[0] = token;
-			i = 1;
-		} else
-		{
-			continue;
-		}
-		while ((token = strtok(NULL, " ")) != NULL)
-		{
-			args[i++] = token;
-		}
-		args[i] = NULL;
+
 		if (strcmp(args[0], "exit") == 0)
 		{
 			break;
 		}
-		pid = fork();
-		if (pid == 0)
-		{
-			execvp(args[0], args);
-			perror("execvp");
-			exit(EXIT_FAILURE);
-		} else if (pid > 0)
-		{
-			wait(NULL);
-		} else
-		{
-			perror("fork");
-			exit(EXIT_FAILURE);
-		}
+		tokenize_command(command, args);
+		execute_command(args);
 	}
 	free(command);
 	return (0);

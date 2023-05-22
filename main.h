@@ -9,5 +9,8 @@
 #include <string.h>
 #define COMMAND_LENGTH 100
 
+void execute_command(char *args[]);
+void tokenize_command(char *command, char *args[]);
+
 #endif
 
