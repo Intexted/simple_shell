@@ -11,10 +11,7 @@ void execute_command(char *args[])
 {
 	pid_t pid;
 	int status;
-	if (strcmp(args[0], "exit") == 0)
-	{
-		exit(EXIT_SUCCESS);
-	}
+
 	pid = fork();
 	if (pid == 0)
 	{
