@@ -14,33 +14,40 @@ int main(void)
 	ssize_t chars_read;
 	char *args[COMMAND_LENGTH];
 
+	int is_interactive = isatty(fileno(stdin));
+
 	while (1)
 	{
-		printf("$ ");
-		chars_read = getline(&command, &bufsize, stdin);
-		if (chars_read == -1)
+		if (is_interactive)
 		{
-			if (feof(stdin))
+			printf("($) ");
+			chars_read = getline(&command, &bufsize, stdin);
+			if (chars_read == -1)
 			{
-				printf("\n");
+				if (feof(stdin))
+				{
+					printf("\n");
+					break;
+				}
+				else if (ferror(stdin))
+				{
+					perror("getline");
+					exit(EXIT_FAILURE);
+				}
+			}
+		}
+		else
+		{
+			chars_read = getline(&command, &bufsize, stdin);
+			if (chars_read == -1)
 				break;
-			}
-			else if (ferror(stdin))
-			{
-				perror("getline");
-				exit(EXIT_FAILURE);
-			}
 		}
-
 		command[strcspn(command, "\n")] = '\0';
-		if (strcmp(command, "exit") == 0)
-		{
-			break;
-		}
 		tokenize_command(command, args);
 		execute_command(args);
 	}
 	free(command);
 	return (0);
 }
+
 
