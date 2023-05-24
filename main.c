@@ -33,12 +33,7 @@ int main(void)
 		}
 
 		command[strcspn(command, "\n")] = '\0';
-
 		tokenize_command(command, args);
-		if (strcmp(args[0], "exit") == 0)
-		{
-			break;
-		}
 		execute_command(args);
 	}
 	free(command);
