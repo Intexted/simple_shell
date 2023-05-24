@@ -15,9 +15,11 @@ void execute_command(char *args[])
 	pid = fork();
 	if (pid == 0)
 	{
-		execvp(args[0], args);
-		perror("execvp");
-		exit(EXIT_FAILURE);
+		if (execvp(args[0], args) == -1)
+		{
+			perror("execvp");
+			exit(EXIT_FAILURE);
+		}
 	} else if (pid > 0)
 	{
 		if (waitpid(pid, &status, 0) == -1)
