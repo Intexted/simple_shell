@@ -34,7 +34,7 @@ int main(void)
 
 		command[strcspn(command, "\n")] = '\0';
 
-		if (strcmp(command, "exit") == 0)
+		if (strstr(command, "exit") == command)
 		{
 			break;
 		}
