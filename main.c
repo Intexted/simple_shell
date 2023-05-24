@@ -44,7 +44,6 @@ int main(void)
 		}
 		command[strcspn(command, "\n")] = '\0';
 		tokenize_command(command, args);
-		execute_command(args);
 	}
 	free(command);
 	return (0);

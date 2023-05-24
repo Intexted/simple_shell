@@ -12,12 +12,7 @@ void tokenize_command(char *command, char *args[])
 {
 	char *token;
 	int i = 0;
-	
-	
-	if (strcmp(command, "exit") == 0)
-	{
-		exit(EXIT_SUCCESS);
-	}
+
 	token = strtok(command, " ");
 	while (token != NULL && i < COMMAND_LENGTH - 1)
 	{
@@ -25,4 +20,9 @@ void tokenize_command(char *command, char *args[])
 		token = strtok(NULL, " ");
 	}
 	args[i] = NULL;
+	if (strcmp(args[0], "exit") == 0)
+	{
+		exit(0);
+	}
+	execute_command(args);
 }
