@@ -34,11 +34,11 @@ int main(void)
 
 		command[strcspn(command, "\n")] = '\0';
 
-		if (strstr(command, "exit") == command)
+		tokenize_command(command, args);
+		if (strcmp(args[0], "exit") == 0)
 		{
 			break;
 		}
-		tokenize_command(command, args);
 		execute_command(args);
 	}
 	free(command);
