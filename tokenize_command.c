@@ -13,6 +13,10 @@ void tokenize_command(char *command, char *args[])
 	char *token;
 	int i = 0;
 
+	if (command[0] == '\0')
+	{
+		return;
+	}
 	token = strtok(command, " ");
 	while (token != NULL && i < COMMAND_LENGTH - 1)
 	{
